@@ -22,12 +22,41 @@
     </script>
     <style type="text/css">
         body {
-            background-image: url("img2.png"); /* Replace with your initial background image */
+            background-image: url("img2.png");
             background-size: cover;
             background-repeat: no-repeat;
             background-position: center;
             margin: 0;
             height: 100vh;
+            z-index: -10;
+        }
+
+        .custom-alert {
+            /* display: none; */
+            position: fixed;
+            left: 50%;
+            top: 50%;
+            transform: translate(-50%, -50%);
+            background-color: white;
+            padding: 20px;
+            box-shadow: 0 0 10px rgba(0, 0, 0, 0.5);
+            border-radius: 5px;
+            z-index: 1000;
+            text-align: center;
+        }
+
+        .custom-alert .modal-content {
+            margin-bottom: 20px;
+            color: black;
+        }
+
+        .custom-alert button {
+            padding: 10px 20px;
+            background-color: #4CAF50;
+            color: white;
+            border: none;
+            border-radius: 5px;
+            cursor: pointer;
         }
     </style>
 </head>
@@ -71,8 +100,51 @@
 
     <audio id="background-audio" src="aud2.mp3" loop style="display: none;"></audio>
 
+    <div id="dropbox"
+        style="display: none; position: absolute; top: 50%; left: 20%; transform: translate(-50%, -50%); padding: 20px; background: rgba(255, 255, 255, 0.8); border-radius: 10px; box-shadow: 0 0 10px rgba(0, 0, 0, 0.5); text-align: center;">
+        <a href="https://example.com" target="_blank">Click here to visit the link</a>
+    </div>
+
+    <div id="custom-alert" class="custom-alert">
+        <div class="modal-content">Wait for 30 seconds to reveal Something! Till then check other thing!</div>
+        <button id="playAudioButton">OK</button>
+    </div>
+
+
     <script>
-        document.addEventListener('click', function() {
+        window.onload = function () {
+            // Display the custom modal alert
+            document.getElementById('custom-alert').style.display = 'block';
+        };
+
+        document.getElementById('playAudioButton').addEventListener('click', function () {
+            // Hide the custom modal
+            document.getElementById('custom-alert').style.display = 'none';
+
+            // Play the audio
+            var audio = document.getElementById('background-audio');
+            audio.play().then(() => {
+                console.log('Audio is playing');
+            }).catch((error) => {
+                console.error('Error playing audio:', error);
+            });
+        });
+
+        window.onload = function () {
+            // Start the 30-second timer
+            const myTimeout = setTimeout(myGreeting, 30000);
+
+            function myGreeting() {
+                var dropbox = document.getElementById('dropbox');
+                dropbox.style.display = 'block';
+                console.log("Dropbox appeared on the screen.");
+            }
+        }
+    </script>
+
+
+    <script>
+        document.addEventListener('click', function () {
             var audio = document.getElementById('background-audio');
             audio.play().then(() => {
                 // Audio is playing successfully
@@ -250,7 +322,7 @@
             var z = ((x / r) * (x / r) + (y / r) * (y / r) - 1) * ((x / r) * (x / r) + (y / r) * (y / r) - 1) * ((x / r) * (x / r) + (y / r) * (y / r) - 1) - (x / r) * (x / r) * (y / r) * (y / r) * (y / r);
             return z < 0;
         }
-        
+
 
         // var audio = document.getElementById('background-audio');
         // audio.play();
@@ -310,6 +382,20 @@
             }
         });
     </script>
+    <!-- <script>
+        window.onload = function () {
+            alert("Wait for 25 seconds to reveal Something! Till then check other thing!");
+
+            const myTimeout = setTimeout(myGreeting, 25000);
+
+            function myGreeting() {
+                var dropbox = document.getElementById('dropbox');
+                dropbox.style.display = 'block';
+                console.log("Dropbox appeared on the screen.");
+            }
+        };
+    </script> -->
+
 </body>
 
 </html>

@@ -1,0 +1,30 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+    <meta charset="UTF-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>Welcome</title>
+    <style>
+        *{
+            margin: 0;
+            padding: 0;
+        }
+        body{
+            height: 100vh;
+        }
+        button{
+            margin: auto;
+        }
+    </style>
+</head>
+<body>
+    <button onclick=redirectToPage2()>Go to Page 2</button>
+
+    <script>
+        function redirectToPage2() {
+            localStorage.setItem('playAudio', 'true'); // Set flag to play audio
+            window.location.href = 'index.html'; // The path to the second HTML file
+        }
+    </script>
+</body>
+</html>
